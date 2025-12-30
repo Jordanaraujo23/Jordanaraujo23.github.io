@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Portfolio | Jordan Araujo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. DESIGN TOKENS --- */
+        :root {
+            /* Paleta Base */
+            --bg-base: #F2EAD3;
+            --bg-gradient: #E6DCC0;
+            
+            /* Cores Funcionais */
+            --text-main: #2C241F;       /* Marrom Quase Preto */
+            --text-muted: #6B5D52;      /* Marrom Acinzentado */
+            --accent-blue: #28547A;     
+            --accent-green: #4E7043;    
+            
+            /* Glassmorphism & Borders */
+            --card-bg: rgba(255, 255, 255, 0.6); /* Transparente */
+            --card-border: 1px solid rgba(255, 255, 255, 0.8);
+            --card-hover-border: 1px solid var(--accent-blue);
+            --blur: blur(12px);
+            
+            --radius-lg: 24px;
+            --radius-sm: 12px;
+        }
+
+        /* --- 2. BASE & ANIMAÇÕES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-base);
+            /* Gradiente de fundo sutil e moderno */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(40, 84, 122, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(78, 112, 67, 0.08) 0%, transparent 25%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding-bottom: 5rem;
+        }
+
+        /* Animação suave de entrada */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-enter {
+            animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0; /* Começa invisível */
+        }
+
+        /* --- 3. LAYOUT --- */
+        .container {
+            max-width: 1100px; /* Mais largo para o Bento Grid */
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navbar Flutuante */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: var(--card-border);
+            border-radius: 100px; /* Pill shape */
+            margin-bottom: 4rem;
+            position: sticky;
+            top: 2rem;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .nav-logo { font-family: 'Fira Code', monospace; font-weight: 600; color: var(--text-main); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.2s; }
+        .nav-links a:hover { color: var(--accent-blue); }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 5rem;
+            max-width: 800px;
+        }
+
+        .role-tag {
+            display: inline-block;
+            background: rgba(40, 84, 122, 0.1);
+            color: var(--accent-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em; /* Kerning moderno */
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--text-main);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); background-color: #000; }
+
+        /* --- 4. BENTO GRID DE PROJETOS --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 1rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Colunas */
+            grid-template-rows: repeat(2, auto);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+        }
+
+        .card:hover {
+            border: var(--card-hover-border);
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+        }
+
+        /* Card Grande (Destaque) */
+        .card.featured {
+            grid-column: span 2; /* Ocupa 2 colunas */
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.4));
+        }
+
+        /* Card Escuro (Contraste) */
+        .card.dark {
+            background-color: var(--text-main);
+            color: #F2EAD3;
+        }
+        .card.dark h3, .card.dark p { color: #F2EAD3; }
+        .card.dark .tag { background: rgba(255,255,255,0.1); color: #fff; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .tags-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: auto; /* Empurra para baixo */
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.04);
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .icon-box {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Menu Mobile Styles */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+            z-index: 200;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(242, 234, 211, 0.95); /* Cor base com opacidade */
+            backdrop-filter: blur(10px);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav-overlay a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .mobile-nav-overlay a:hover { color: var(--accent-blue); }
+
+        /* Responsividade Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .bento-grid { grid-template-columns: 1fr; } 
+            .card.featured { grid-column: span 1; }
+            
+            nav { 
+                /* Reativando nav no mobile */
+                display: flex; 
+                padding: 0.8rem 1.2rem;
+            }
+            .nav-links { display: none; } /* Esconde links desktop */
+            .mobile-toggle { display: block; } /* Mostra hambúrguer */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <nav class="animate-enter" style="animation-delay: 0.1s;">
+            <div class="nav-logo">&lt;JA /&gt;</div>
+            <div class="nav-links">
+                <a href="#">Trabalhos</a>
+                <a href="#">Sobre</a>
+                <a href="#">Contato</a>
+            </div>
+            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+        </nav>
+
+        <!-- Menu Overlay Mobile -->
+        <div class="mobile-nav-overlay" id="mobileOverlay">
+            <a href="#" onclick="toggleMenu()">Trabalhos</a>
+            <a href="#" onclick="toggleMenu()">Sobre</a>
+            <a href="#" onclick="toggleMenu()">Contato</a>
+        </div>
+
+        <header class="hero animate-enter" style="animation-delay: 0.2s;">
+            <span class="role-tag">Fullstack Developer & Automation</span>
+            <h1>Construindo sistemas digitais com precisão.</h1>
+            <p>Especializado em arquitetura de dados, automação em Python e interfaces web de alta performance.</p>
+            
+            <a href="#" class="btn-primary">Ver Projetos ↓</a>
+        </header>
+
+        <section class="animate-enter" style="animation-delay: 0.4s;">
+            <div class="section-header">
+                <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Últimos Trabalhos</h2>
+            </div>
+
+            <div class="bento-grid">
+                
+                <article class="card featured">
+                    <div class="icon-box">📊</div>
+                    <div>
+                        <h3>Painel Admin - iEducar</h3>
+                        <p>Dashboard completo para gestão escolar municipal. Integração de API, gráficos em tempo real e exportação de relatórios.</p>
+                    </div>
+                    <div class="tags-wrapper">
+                        <span class="tag">Dashboard</span>
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon-box">🤖</div>
+                    <div>
+                        <h3>RPA Python Bot</h3>
+                        <p>Automação de processos repetitivos, reduzindo 4h de trabalho manual para 5 min.</p>
+                    </div>
+                    <div class="tags-wrapper">
+                        <span class="tag">Python</span>
+                        <span class="tag">Selenium</span>
+                    </div>
+                </article>
+
+                <article class="card dark">
+                    <div>
+                        <div style="font-family: 'Fira Code'; margin-bottom: 1rem; opacity: 0.7;">&lt;Stack /&gt;</div>
+                        <h3 style="margin-bottom: 1.5rem;">Tech Arsenal</h3>
+                        <div class="tags-wrapper">
+                            <span class="tag">Python</span>
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">SQL</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card featured">
+                    <div class="icon-box">🌐</div>
+                    <div>
+                        <h3>Alpha Studio</h3>
+                        <p>Website institucional e painel de gestão de conteúdo (CMS) personalizado para agência digital.</p>
+                    </div>
+                    <div class="tags-wrapper">
+                        <span class="tag">Frontend</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">CMS</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <footer class="animate-enter" style="animation-delay: 0.6s; margin-top: 5rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 2rem; display: flex; justify-content: space-between; color: var(--text-muted);">
+            <div style="font-family: 'Fira Code'; font-size: 0.8rem;">
+                © 2025 Jordan Araujo
+            </div>
+            <div style="font-family: 'Fira Code'; font-size: 0.8rem;">
+                Brasil, AL
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('mobileOverlay');
+            const btns = document.querySelector('.mobile-toggle');
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                btns.innerHTML = "☰";
+                document.body.style.overflow = "auto";
+            } else {
+                overlay.classList.add('active');
+                btns.innerHTML = "✕";
+                document.body.style.overflow = "hidden";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dev Portfolio | Jordan Araujo</title>
+    <meta name="description" content="Portfólio de Jordan Araujo - Desenvolvedor Fullstack especializado em Python, Automação e Dashboards Interativos.">
+    <meta property="og:title" content="Dev Portfolio | Jordan Araujo">
+    <meta property="og:description" content="Construindo sistemas digitais com precisão. Python, Web & Data.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Jordan+Portfolio">
+    <meta property="og:type" content="website">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. DESIGN TOKENS --- */
         :root {
-            /* Paleta Base */
             --bg-base: #F2EAD3;
             --bg-gradient: #E6DCC0;
             
-            /* Cores Funcionais */
-            --text-main: #2C241F;       /* Marrom Quase Preto */
-            --text-muted: #6B5D52;      /* Marrom Acinzentado */
+            --text-main: #2C241F;       
+            --text-muted: #6B5D52;      
             --accent-blue: #28547A;     
             --accent-green: #4E7043;    
             
-            /* Glassmorphism & Borders */
-            --card-bg: rgba(255, 255, 255, 0.6); /* Transparente */
+            --card-bg: rgba(255, 255, 255, 0.6); 
             --card-border: 1px solid rgba(255, 255, 255, 0.8);
             --card-hover-border: 1px solid var(--accent-blue);
             --blur: blur(12px);
@@ -32,12 +33,30 @@
             --radius-sm: 12px;
         }
 
-        /* --- 2. BASE & ANIMAÇÕES --- */
+
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-base);
-            /* Gradiente de fundo sutil e moderno */
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(40, 84, 122, 0.08) 0%, transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(78, 112, 67, 0.08) 0%, transparent 25%);
@@ -47,7 +66,26 @@
             padding-bottom: 5rem;
         }
 
-        /* Animação suave de entrada */
+        html { scroll-behavior: smooth; }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .card-content {
+            transform: translateZ(20px); 
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -55,17 +93,15 @@
 
         .animate-enter {
             animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            opacity: 0; /* Começa invisível */
+            opacity: 0; 
         }
 
-        /* --- 3. LAYOUT --- */
         .container {
-            max-width: 1100px; /* Mais largo para o Bento Grid */
+            max-width: 1100px; 
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* Navbar Flutuante */
         nav {
             display: flex;
             justify-content: space-between;
@@ -75,7 +111,7 @@
             backdrop-filter: var(--blur);
             -webkit-backdrop-filter: var(--blur);
             border: var(--card-border);
-            border-radius: 100px; /* Pill shape */
+            border-radius: 100px; 
             margin-bottom: 4rem;
             position: sticky;
             top: 2rem;
@@ -88,7 +124,6 @@
         .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.2s; }
         .nav-links a:hover { color: var(--accent-blue); }
 
-        /* Hero Section */
         .hero {
             margin-bottom: 5rem;
             max-width: 800px;
@@ -111,7 +146,7 @@
             font-size: 4rem;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.02em; /* Kerning moderno */
+            letter-spacing: -0.02em; 
         }
 
         .hero p {
@@ -135,7 +170,6 @@
 
         .btn-primary:hover { transform: translateY(-2px); background-color: #000; }
 
-        /* --- 4. BENTO GRID DE PROJETOS --- */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -147,7 +181,7 @@
 
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Colunas */
+            grid-template-columns: repeat(3, 1fr); 
             grid-template-rows: repeat(2, auto);
             gap: 1.5rem;
         }
@@ -173,13 +207,11 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.04);
         }
 
-        /* Card Grande (Destaque) */
         .card.featured {
-            grid-column: span 2; /* Ocupa 2 colunas */
+            grid-column: span 2; 
             background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.4));
         }
 
-        /* Card Escuro (Contraste) */
         .card.dark {
             background-color: var(--text-main);
             color: #F2EAD3;
@@ -203,7 +235,7 @@
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-top: auto; /* Empurra para baixo */
+            margin-top: auto; 
         }
 
         .tag {
@@ -227,7 +259,6 @@
             font-size: 1.2rem;
         }
 
-        /* Menu Mobile Styles */
         .mobile-toggle {
             display: none;
             background: none;
@@ -241,7 +272,7 @@
         .mobile-nav-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(242, 234, 211, 0.95); /* Cor base com opacidade */
+            background: rgba(242, 234, 211, 0.95); 
             backdrop-filter: blur(10px);
             z-index: 150;
             display: flex;
@@ -269,52 +300,80 @@
 
         .mobile-nav-overlay a:hover { color: var(--accent-blue); }
 
-        /* Responsividade Mobile */
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             .bento-grid { grid-template-columns: 1fr; } 
             .card.featured { grid-column: span 1; }
             
             nav { 
-                /* Reativando nav no mobile */
                 display: flex; 
                 padding: 0.8rem 1.2rem;
             }
-            .nav-links { display: none; } /* Esconde links desktop */
-            .mobile-toggle { display: block; } /* Mostra hambúrguer */
+            .nav-links { display: none; } 
+            .mobile-toggle { display: block; } 
         }
+
+        .page-section { margin-top: 8rem; margin-bottom: 4rem; }
+        
+        .about-text {
+            font-size: 1.1rem; 
+            max-width: 700px; 
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-grid {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-muted);
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        .contact-link:hover { color: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-3px); }
+        .contact-link span { font-size: 0.9rem; font-family: 'Fira Code'; display: block; opacity: 0.6; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
+    <div class="grain-overlay"></div>
+
     <div class="container">
         
         <nav class="animate-enter" style="animation-delay: 0.1s;">
-            <div class="nav-logo">&lt;JA /&gt;</div>
+            <div class="nav-logo">&lt;JA/&gt;</div>
             <div class="nav-links">
-                <a href="#">Trabalhos</a>
-                <a href="#">Sobre</a>
-                <a href="#">Contato</a>
+                <a href="#inicio">&lt;Início/&gt;</a>
+                <a href="#trabalhos">&lt;Trabalhos/&gt;</a>
+                <a href="#sobre">&lt;Sobre/&gt;</a>
+                <a href="#contato">&lt;Contato/&gt;</a>
+
             </div>
             <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
         </nav>
 
-        <!-- Menu Overlay Mobile -->
         <div class="mobile-nav-overlay" id="mobileOverlay">
-            <a href="#" onclick="toggleMenu()">Trabalhos</a>
-            <a href="#" onclick="toggleMenu()">Sobre</a>
-            <a href="#" onclick="toggleMenu()">Contato</a>
+            <a href="#inicio" onclick="toggleMenu()">Início</a>
+            <a href="#trabalhos" onclick="toggleMenu()">Trabalhos</a>
+            <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+            <a href="#contato" onclick="toggleMenu()">Contato</a>
         </div>
 
-        <header class="hero animate-enter" style="animation-delay: 0.2s;">
-            <span class="role-tag">Fullstack Developer & Automation</span>
+        <header id="inicio" class="hero animate-enter" style="animation-delay: 0.2s;">
+            <span class="role-tag typing-target"></span>
             <h1>Construindo sistemas digitais com precisão.</h1>
-            <p>Especializado em arquitetura de dados, automação em Python e interfaces web de alta performance.</p>
+            <p>Especializando-me em arquitetura, análise de dados, automação em Python e interfaces web de alta performance.</p>
             
             <a href="#" class="btn-primary">Ver Projetos ↓</a>
         </header>
 
-        <section class="animate-enter" style="animation-delay: 0.4s;">
+        <section id="trabalhos" class="animate-enter" style="animation-delay: 0.4s;">
             <div class="section-header">
                 <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Últimos Trabalhos</h2>
             </div>
@@ -322,57 +381,103 @@
             <div class="bento-grid">
                 
                 <article class="card featured">
-                    <div class="icon-box">📊</div>
-                    <div>
-                        <h3>Painel Admin - iEducar</h3>
-                        <p>Dashboard completo para gestão escolar municipal. Integração de API, gráficos em tempo real e exportação de relatórios.</p>
-                    </div>
-                    <div class="tags-wrapper">
-                        <span class="tag">Dashboard</span>
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">Analytics</span>
+                     <div class="card-content">
+                        <div class="icon-box">🌐</div>
+                        <div>
+                            <h3>Alpha Studio</h3>
+                            <p>Website institucional e CMS personalizado para agência digital. Foco em experiência visual premium e gestão de conteúdo dinâmica.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Frontend</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">CMS</span>
+                        </div>
                     </div>
                 </article>
 
                 <article class="card">
-                    <div class="icon-box">🤖</div>
-                    <div>
-                        <h3>RPA Python Bot</h3>
-                        <p>Automação de processos repetitivos, reduzindo 4h de trabalho manual para 5 min.</p>
-                    </div>
-                    <div class="tags-wrapper">
-                        <span class="tag">Python</span>
-                        <span class="tag">Selenium</span>
+                     <div class="card-content">
+                        <div class="icon-box">🎓</div>
+                        <div>
+                            <h3>PIBID UFAL</h3>
+                            <p>Sistema de gestão para o Programa Institucional de Bolsas. Controle de inscritos, certificados e relatórios.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Admin Panel</span>
+                        </div>
                     </div>
                 </article>
 
                 <article class="card dark">
-                    <div>
-                        <div style="font-family: 'Fira Code'; margin-bottom: 1rem; opacity: 0.7;">&lt;Stack /&gt;</div>
-                        <h3 style="margin-bottom: 1.5rem;">Tech Arsenal</h3>
-                        <div class="tags-wrapper">
-                            <span class="tag">Python</span>
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Git</span>
-                            <span class="tag">SQL</span>
+                     <div class="card-content">
+                        <div>
+                            <div style="font-family: 'Fira Code'; margin-bottom: 1rem; opacity: 0.7;">&lt;Stack /&gt;</div>
+                            <h3 style="margin-bottom: 1.5rem;">Tech Arsenal</h3>
+                            <div class="tags-wrapper">
+                                <span class="tag">Python</span>
+                                <span class="tag">Pandas</span>
+                                <span class="tag">Data Viz</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Git</span>
+                            </div>
                         </div>
                     </div>
                 </article>
 
                 <article class="card featured">
-                    <div class="icon-box">🌐</div>
-                    <div>
-                        <h3>Alpha Studio</h3>
-                        <p>Website institucional e painel de gestão de conteúdo (CMS) personalizado para agência digital.</p>
-                    </div>
-                    <div class="tags-wrapper">
-                        <span class="tag">Frontend</span>
-                        <span class="tag">UI Design</span>
-                        <span class="tag">CMS</span>
+                    <div class="card-content">
+                        <div class="icon-box">🚀</div>
+                        <div>
+                            <h3>Próximos Passos</h3>
+                            <p>Novos projetos de grande escala em desenvolvimento. Soluções focadas em IA e Automação corporativa chegando em breve.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Inovação</span>
+                            <span class="tag">RPA</span>
+                            <span class="tag">AI</span>
+                        </div>
                     </div>
                 </article>
 
+            </div>
+        </section>
+
+        <section id="sobre" class="page-section animate-enter" style="animation-delay: 0.5s;">
+             <div class="section-header">
+                <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Sobre Mim</h2>
+            </div>
+            <p class="about-text">
+                Olá! Sou Jordan, um desenvolvedor movido pela busca da eficiência e beleza no código. 
+                Combinando a lógica estruturada do Python com a criatividade do Frontend moderno, 
+                eu crio soluções que não apenas funcionam, mas encantam.
+            </p>
+            <p class="about-text">
+                Atualmente dedicado ao aprimoramento contínuo e ao desenvolvimento de soluções web modernas, com foco em automação de processos (RPA), análise de dados e dashboards interativos para inteligência de negócios.
+            </p>
+        </section>
+
+        <section id="contato" class="page-section animate-enter" style="animation-delay: 0.6s;">
+            <div class="section-header">
+                <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Vamos conectar?</h2>
+            </div>
+            <div class="contact-grid">
+                <a href="https://instagram.com/" class="contact-link" target="_blank">
+                    <span>Instagram</span>
+                    @oprof_jordan
+                </a>
+                <a href="mailto:contato@exemplo.com" class="contact-link">
+                    <span>Email</span>
+                    jordan.araujo.im@gmail.com
+                </a>
+                <a href="https://github.com/Jordanaraujo23" class="contact-link" target="_blank">
+                    <span>GitHub</span>
+                    @Jordanaraujo23
+                </a>
+                <a href="https://wa.me/" class="contact-link" target="_blank">
+                    <span>WhatsApp</span>
+                    (00) 00000-0000
+                </a>
             </div>
         </section>
 
@@ -401,6 +506,58 @@
                 btns.innerHTML = "✕";
                 document.body.style.overflow = "hidden";
             }
+        }
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xPct = x / rect.width;
+                const yPct = y / rect.height;
+                
+                const xRot = (yPct - 0.5) * 10; 
+                const yRot = (xPct - 0.5) * -10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        const textToType = "Fullstack Developer & Automation";
+        const typeTarget = document.querySelector('.typing-target');
+        let typeIndex = 0;
+
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                typeTarget.innerHTML += textToType.charAt(typeIndex);
+                if(typeIndex === textToType.length - 1) typeTarget.classList.add('typing-cursor');
+                typeIndex++;
+                setTimeout(typeWriter, 50); 
+            }
+        }
+        setTimeout(typeWriter, 1000);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, .card').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+
+        // Force scroll to top on load
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
         }
     </script>
 </body>

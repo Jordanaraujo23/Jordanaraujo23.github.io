@@ -7,7 +7,7 @@
     <meta name="description" content="Portfólio de Jordan Araujo - Desenvolvedor Fullstack especializado em Python, Automação e Dashboards Interativos.">
     <meta property="og:title" content="Dev Portfolio | Jordan Araujo">
     <meta property="og:description" content="Construindo sistemas digitais com precisão. Python, Web & Data.">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Jordan+Portfolio">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop">
     <meta property="og:type" content="website">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,6 +205,7 @@
             background: rgba(255, 255, 255, 0.85);
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+            cursor: pointer;
         }
 
         .card.featured {
@@ -355,7 +356,7 @@
                 <a href="#contato">&lt;Contato/&gt;</a>
 
             </div>
-            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+            <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
         </nav>
 
         <div class="mobile-nav-overlay" id="mobileOverlay">
@@ -377,10 +378,10 @@
             <div class="section-header">
                 <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Últimos Trabalhos</h2>
             </div>
-
             <div class="bento-grid">
                 
-                <article class="card featured">
+                <!-- Alpha Studio -->
+                <article class="card featured" onclick="window.open('https://alpha-studios.vercel.app/', '_blank')">
                      <div class="card-content">
                         <div class="icon-box">🌐</div>
                         <div>
@@ -395,20 +396,69 @@
                     </div>
                 </article>
 
-                <article class="card">
+                <!-- YanTec (New) -->
+                <article class="card" onclick="window.open('https://github.com/Jordanaraujo23/PROJETOS/tree/main/NEW-YANTEC-SITE', '_blank')">
                      <div class="card-content">
-                        <div class="icon-box">🎓</div>
+                        <div class="icon-box">🏢</div>
                         <div>
-                            <h3>PIBID UFAL</h3>
-                            <p>Sistema de gestão para o Programa Institucional de Bolsas. Controle de inscritos, certificados e relatórios.</p>
+                            <h3>Yan Tecnologia</h3>
+                            <p>Solução corporativa com catálogo interativo e design responsivo avançado. Layouts modernos.</p>
                         </div>
                         <div class="tags-wrapper">
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Admin Panel</span>
+                            <span class="tag">Bootstrap</span>
+                            <span class="tag">Grid</span>
+                            <span class="tag">JS</span>
                         </div>
                     </div>
                 </article>
 
+                <!-- PIBID -->
+                <article class="card" onclick="window.open('https://pibid-ufal.web.app/', '_blank')">
+                     <div class="card-content">
+                        <div class="icon-box">🎓</div>
+                        <div>
+                            <h3>PIBID UFAL</h3>
+                            <p>Sistema de gestão para o Programa Institucional de Bolsas. Controle de inscritos e certificados.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Dashboard</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Innov Play (New) -->
+                <article class="card" onclick="window.open('https://github.com/Jordanaraujo23/PROJETOS/tree/main/InnovPlay', '_blank')">
+                     <div class="card-content">
+                        <div class="icon-box">🎮</div>
+                        <div>
+                            <h3>Innov Play</h3>
+                            <p>Plataforma gamificada para engajamento escolar. Trilhas de aprendizagem interativas.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Gamification</span>
+                            <span class="tag">EduTech</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- AutoBot (New) -->
+                <article class="card" onclick="window.open('https://github.com/Jordanaraujo23/PROJETOS/tree/main/AutoBot', '_blank')">
+                     <div class="card-content">
+                        <div class="icon-box">🤖</div>
+                        <div>
+                            <h3>AutoBot & RPA</h3>
+                            <p>Automação de processos e atendimento inteligente com scripts Python e Selenium.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Python</span>
+                            <span class="tag">RPA</span>
+                            <span class="tag">Selenium</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Stack -->
                 <article class="card dark">
                      <div class="card-content">
                         <div>
@@ -417,14 +467,14 @@
                             <div class="tags-wrapper">
                                 <span class="tag">Python</span>
                                 <span class="tag">Pandas</span>
-                                <span class="tag">Data Viz</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">Git</span>
+                                <span class="tag">Modern Web</span>
+                                <span class="tag">Automation</span>
                             </div>
                         </div>
                     </div>
                 </article>
 
+                <!-- Next Steps -->
                 <article class="card featured">
                     <div class="card-content">
                         <div class="icon-box">🚀</div>
@@ -446,9 +496,7 @@
         <section id="sobre" class="page-section animate-enter" style="animation-delay: 0.5s;">
              <div class="section-header">
                 <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Sobre Mim</h2>
-            </div>
-            <p class="about-text">
-                Olá! Sou Jordan, um desenvolvedor movido pela busca da eficiência e beleza no código. 
+            </div> 
                 Combinando a lógica estruturada do Python com a criatividade do Frontend moderno, 
                 eu crio soluções que não apenas funcionam, mas encantam.
             </p>
@@ -462,11 +510,11 @@
                 <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Vamos conectar?</h2>
             </div>
             <div class="contact-grid">
-                <a href="https://instagram.com/" class="contact-link" target="_blank">
+                <a href="https://instagram.com/oprof_jordan" class="contact-link" target="_blank">
                     <span>Instagram</span>
                     @oprof_jordan
                 </a>
-                <a href="mailto:contato@exemplo.com" class="contact-link">
+                <a href="mailto:jordan.araujo.im@gmail.com" class="contact-link">
                     <span>Email</span>
                     jordan.araujo.im@gmail.com
                 </a>
@@ -474,9 +522,9 @@
                     <span>GitHub</span>
                     @Jordanaraujo23
                 </a>
-                <a href="https://wa.me/" class="contact-link" target="_blank">
+                <a href="https://wa.me/5582996792564" class="contact-link" target="_blank">
                     <span>WhatsApp</span>
-                    (00) 00000-0000
+                    (82) 9 9679-2564
                 </a>
             </div>
         </section>
@@ -560,5 +608,10 @@
             window.scrollTo(0, 0);
         }
     </script>
-</body>
+<div style='text-align: center; opacity: 0.6; font-size: 0.8rem; padding: 20px; color: inherit; width: 100%;'>2025 &copy; Dev Portfolio | Created for Dev root@J/A:~#</div></body>
 </html>
+<!-- root@J/A:~# -->
+
+
+
+

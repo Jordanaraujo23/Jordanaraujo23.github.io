@@ -20,50 +20,55 @@
             --bg-gradient: #E6DCC0;
             
             --text-main: #2C241F;       
-            --text-muted: #6B5D52;      
+            --text-muted: #594D43;      
             --accent-blue: #28547A;     
             --accent-green: #4E7043;    
             
-            --card-bg: rgba(255, 255, 255, 0.6); 
-            --card-border: 1px solid rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.45); 
+            --card-border: 1px solid rgba(255, 255, 255, 0.6);
             --card-hover-border: 1px solid var(--accent-blue);
-            --blur: blur(12px);
+            --blur: blur(16px);
             
-            --radius-lg: 24px;
-            --radius-sm: 12px;
+            --radius-lg: 20px;
+            --radius-sm: 8px;
         }
-
-
 
         .typing-cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
+            color: var(--accent-blue);
         }
         @keyframes blink { 50% { opacity: 0; } }
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-base);
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(40, 84, 122, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(78, 112, 67, 0.08) 0%, transparent 25%);
+                radial-gradient(circle at 10% 20%, rgba(40, 84, 122, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(78, 112, 67, 0.12) 0%, transparent 40%);
+            background-size: 150% 150%;
+            animation: bgBreath 15s ease-in-out infinite alternate;
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             padding-bottom: 5rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @keyframes bgBreath {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         html { scroll-behavior: smooth; }
@@ -73,7 +78,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.05;
+            opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
@@ -87,12 +92,12 @@
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .animate-enter {
-            animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             opacity: 0; 
         }
 
@@ -106,54 +111,62 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.5);
+            padding: 1rem 1.8rem;
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: var(--blur);
             -webkit-backdrop-filter: var(--blur);
             border: var(--card-border);
             border-radius: 100px; 
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
             position: sticky;
             top: 2rem;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
         }
 
-        .nav-logo { font-family: 'Fira Code', monospace; font-weight: 600; color: var(--text-main); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.2s; }
-        .nav-links a:hover { color: var(--accent-blue); }
+        .nav-logo { font-family: 'Fira Code', monospace; font-weight: 700; color: var(--text-main); font-size: 1.1rem; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: 0.2s; }
+        .nav-links a:hover { color: var(--accent-blue); transform: translateY(-1px); }
 
         .hero {
-            margin-bottom: 5rem;
-            max-width: 800px;
+            margin-bottom: 8rem;
+            max-width: 850px;
         }
 
         .role-tag {
             display: inline-block;
-            background: rgba(40, 84, 122, 0.1);
+            background: rgba(40, 84, 122, 0.08);
             color: var(--accent-blue);
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 100px;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(40, 84, 122, 0.1);
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 4.5rem;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em; 
+            margin-bottom: 1.8rem;
+            letter-spacing: -0.03em; 
+            background: linear-gradient(to right, var(--text-main) 40%, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
         }
 
         .btn-primary {
@@ -161,79 +174,98 @@
             align-items: center;
             background-color: var(--text-main);
             color: #fff;
-            padding: 1rem 2rem;
+            padding: 1.1rem 2.2rem;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 500;
-            transition: transform 0.2s;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(44, 36, 31, 0.2);
         }
 
-        .btn-primary:hover { transform: translateY(-2px); background-color: #000; }
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            background-color: #000;
+            box-shadow: 0 8px 25px rgba(44, 36, 31, 0.3);
+        }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
             padding-bottom: 1rem;
+        }
+        
+        h2 {
+            font-family: 'Fira Code', monospace; 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            color: var(--accent-blue);
+            font-weight: 600;
         }
 
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
-            grid-template-rows: repeat(2, auto);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .card {
             background: var(--card-bg);
             border: var(--card-border);
             border-radius: var(--radius-lg);
-            padding: 2rem;
-            transition: all 0.3s ease;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 280px;
+            min-height: 320px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            backdrop-filter: blur(8px);
         }
 
         .card:hover {
-            border: var(--card-hover-border);
-            background: rgba(255, 255, 255, 0.85);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(40, 84, 122, 0.1);
         }
 
         .card.featured {
             grid-column: span 2; 
-            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.4));
+            background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
         }
 
         .card.dark {
             background-color: var(--text-main);
             color: #F2EAD3;
+            border: none;
         }
         .card.dark h3, .card.dark p { color: #F2EAD3; }
-        .card.dark .tag { background: rgba(255,255,255,0.1); color: #fff; }
+        .card.dark .tag { background: rgba(255,255,255,0.15); color: #fff; }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-family: 'Playfair Display', serif;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.01em;
         }
 
         .card p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .tags-wrapper {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
             flex-wrap: wrap;
             margin-top: auto; 
         }
@@ -241,22 +273,24 @@
         .tag {
             font-size: 0.75rem;
             font-family: 'Fira Code', monospace;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            background: rgba(0,0,0,0.04);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.6);
             color: var(--text-main);
-            text-transform: uppercase;
+            border: 1px solid rgba(0,0,0,0.05);
+            font-weight: 500;
         }
 
         .icon-box {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: var(--bg-base);
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
 
         .mobile-toggle {
@@ -272,72 +306,89 @@
         .mobile-nav-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(242, 234, 211, 0.95); 
+            background: rgba(242, 234, 211, 0.98); 
             backdrop-filter: blur(10px);
             z-index: 150;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             opacity: 0;
             pointer-events: none;
-            transition: 0.3s ease;
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(20px);
         }
 
         .mobile-nav-overlay.active {
             opacity: 1;
             pointer-events: auto;
+            transform: translateY(0);
         }
 
         .mobile-nav-overlay a {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--text-main);
             text-decoration: none;
             transition: 0.2s;
         }
 
-        .mobile-nav-overlay a:hover { color: var(--accent-blue); }
+        .mobile-nav-overlay a:hover { color: var(--accent-blue); font-style: italic; }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
+        @media (max-width: 900px) {
+            h1 { font-size: 3rem; }
             .bento-grid { grid-template-columns: 1fr; } 
             .card.featured { grid-column: span 1; }
             
             nav { 
-                display: flex; 
-                padding: 0.8rem 1.2rem;
+                padding: 1rem 1.5rem;
+                margin-bottom: 3rem;
             }
             .nav-links { display: none; } 
             .mobile-toggle { display: block; } 
+            .hero { margin-bottom: 5rem; }
         }
 
-        .page-section { margin-top: 8rem; margin-bottom: 4rem; }
+        .page-section { margin-top: 10rem; margin-bottom: 6rem; }
         
         .about-text {
-            font-size: 1.1rem; 
-            max-width: 700px; 
+            font-size: 1.25rem; 
+            max-width: 750px; 
             color: var(--text-muted);
             margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .contact-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            flex-wrap: wrap;
         }
         .contact-link {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* Reduced from 1.8rem to fit better */
             color: var(--text-main);
             text-decoration: none;
-            border-bottom: 1px solid var(--text-muted);
-            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(44, 36, 31, 0.2);
+            padding-bottom: 15px;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            overflow-wrap: break-word; /* Prevents overflow */
+            word-break: break-word;    /* Ensures long emails wrap */
+            hyphens: auto;
         }
-        .contact-link:hover { color: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-3px); }
-        .contact-link span { font-size: 0.9rem; font-family: 'Fira Code'; display: block; opacity: 0.6; margin-bottom: 5px; }
+        .contact-link:hover { 
+            color: var(--accent-blue); 
+            border-color: var(--accent-blue); 
+            transform: translateY(-5px); 
+            padding-bottom: 20px;
+        }
+        .contact-link span.label { font-size: 0.8rem; font-family: 'Fira Code'; display: block; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; }
+        footer { font-weight: 500; font-family: 'Inter', sans-serif !important; opacity: 0.7; }
     </style>
 </head>
 <body>
@@ -410,6 +461,22 @@
                     </div>
                 </article>
 
+                <!-- Letreiro Digital (New) -->
+                <article class="card">
+                     <div class="card-content">
+                        <div class="icon-box">📺</div>
+                        <div>
+                            <h3>Letreiro Digital</h3>
+                            <p>Solução desktop para gestão de sinalização em eventos. Cronometragem, mensagens em tempo real e suporte a múltiplas telas.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Python</span>
+                            <span class="tag">Tkinter</span>
+                            <span class="tag">Desktop</span>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- AutoBot (New) -->
                 <article class="card">
                      <div class="card-content">
@@ -461,6 +528,67 @@
             </div>
         </section>
 
+        <section id="tech-arsenal" class="page-section animate-enter" style="animation-delay: 0.5s;">
+            <div class="section-header">
+                <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Tech Arsenal</h2>
+            </div>
+            <div class="bento-grid">
+                <!-- Automation & Python (Featured) -->
+                <article class="card" style="background: linear-gradient(135deg, rgba(40, 84, 122, 0.1), rgba(255,255,255,0.4));">
+                    <div class="card-content">
+                        <div class="icon-box">🐍</div>
+                        <div>
+                            <h3>Python Powerhouse</h3>
+                            <p>Especialista em automação de processos, scripts complexos de RPA e análise de dados para tomada de decisão.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Python</span>
+                            <span class="tag">Selenium</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">RPA</span>
+                            <span class="tag">Web Scraping</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Frontend -->
+                <article class="card">
+                    <div class="card-content">
+                        <div class="icon-box">🎨</div>
+                        <div>
+                            <h3>Frontend & UI</h3>
+                            <p>Interfaces modernas, responsivas e focadas na experiência do usuário.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Bootstrap</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Cloud & Backend -->
+                <article class="card">
+                    <div class="card-content">
+                        <div class="icon-box">⚡</div>
+                        <div>
+                            <h3>Cloud & Tools</h3>
+                            <p>Infraestrutura escalável e ferramentas de produtividade para desenvolvimento ágil.</p>
+                        </div>
+                        <div class="tags-wrapper">
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">GitHub</span>
+                            <span class="tag">Vercel</span>
+                            <span class="tag">VS Code</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section id="sobre" class="page-section animate-enter" style="animation-delay: 0.5s;">
              <div class="section-header">
                 <h2 style="font-family: 'Fira Code'; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Sobre Mim</h2>
@@ -479,20 +607,20 @@
             </div>
             <div class="contact-grid">
                 <a href="https://instagram.com/oprof_jordan" class="contact-link" target="_blank">
-                    <span>Instagram</span>
+                    <span class="label">Instagram</span>
                     @oprof_jordan
                 </a>
-                <a href="mailto:jordan.araujo.im@gmail.com" class="contact-link">
-                    <span>Email</span>
+                <a href="mailto:jordan.araujo.im@gmail.com?subject=Contato%20via%20Portfolio" class="contact-link">
+                    <span class="label">Email</span>
                     jordan.araujo.im@gmail.com
                 </a>
                 <a href="https://github.com/Jordanaraujo23" class="contact-link" target="_blank">
-                    <span>GitHub</span>
+                    <span class="label">GitHub</span>
                     @Jordanaraujo23
                 </a>
-                <a href="https://wa.me/5582996792564" class="contact-link" target="_blank">
-                    <span>WhatsApp</span>
-                    (82) 9 9679-2564
+                <a href="https://wa.me/5582991330222" class="contact-link" target="_blank">
+                    <span class="label">WhatsApp</span>
+                    (82) 9 9133-0232
                 </a>
             </div>
         </section>
